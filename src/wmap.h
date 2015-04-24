@@ -21,6 +21,7 @@
 #include <sensor_msgs/PointCloud2.h>
 
 #include <string.h>
+#include <string>
 #include <sstream>
 #include <cmath>
 #include <vector>
@@ -28,6 +29,8 @@
 #include <sensor_msgs/LaserScan.h>
 #include <laser_geometry/laser_geometry.h>
 #include <visualization_msgs/Marker.h>
+#include <costmap_2d/costmap_2d_ros.h>
+#include <costmap_2d/observation_buffer.h>
 
 //Opencv
 //#include "cv.h"
@@ -47,29 +50,18 @@ using namespace std;
 class wmap{
 
 public:
-    bool save_data;
+
     wmap();
-    string path_imgrec;
-    string path_bow;
+    ~wmap();
+    void pcl2Callback(const sensor_msgs::PointCloud2::ConstPtr& msg);
 
     geometry_msgs::PoseStamped f_pose;
-
-    int counter_imgrec;
-    int n_keymatches;
-    double sec_stamp_pdc;
-    void pcl2Callback(const sensor_msgs::PointCloud2::ConstPtr& input);
-    void bow();
-    void images_fast_map();
-    ~wmap();
-
 
 private:
 
     ros::Subscriber pcl2_sub_;
-    ros::Publisher filtered_pub_;
+    ros::Subscriber aick_pose_sub_;
     tf::TransformListener tf_listener_;
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud;
-
 
 };
 }//namespace mapper

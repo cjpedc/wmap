@@ -1,43 +1,34 @@
 #include "wmap.h"
 
+#include <pcl/common/transforms.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/segmentation/plane_refinement_comparator.h>
+
 namespace mapper{
+
+pcl::PointCloud<pcl::PointXYZRGB>::Ptr input_cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
 
 wmap::wmap(){
 
-    ROS_INFO_STREAM("Starting Point Cloud");
+    ROS_INFO_STREAM("Starting MAP");
     ros::NodeHandle n_;
     // Subscribe to point cloud
-    pcl2_sub_ = n_.subscribe ("/kinect2/depth_highres/points", 1, &wmap::pcl2Callback, this);
-
-    cloud = pcl::PointCloud<pcl::PointXYZRGB>::Ptr(new pcl::PointCloud<pcl::PointXYZRGB>);
-
-    // Publish a point cloud of filtered data that is not part of the floor
-    //       filtered_pub_ = n_.advertise< pcl::PointCloud<pcl::PointXYZRGB> > ("fltr_pcl", 1);
+    //pcl2_sub_ = n_.subscribe ("/kinect2/depth_highres/points", 1, &wmap::pcl2Callback, this);
 
 }
 
 wmap::~wmap() { }
-
+/*
 void wmap::pcl2Callback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
     ROS_INFO_STREAM("Received pcl2Callback");
 
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr tempCloud(new pcl::PointCloud<pcl::PointXYZRGB>);
-    //        pcl::fromPCLPointCloud2 (*msg, *tempCloud);
-    //cloud = tempCloud;
+    pcl::fromROSMsg(*msg, *input_cloud);
 
-    // Make new point cloud that is in the working frame
-    //        pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_transformed(new pcl::PointCloud<pcl::PointXYZRGB>);
-    /*
-        pcl::PCLPointCloud2 pcl_pc;
-        pcl_conversions::toPCL( *pcl2_in , pcl_pc);
-
-        pcl::PointCloud<pcl::PointXYZ> cloud;
-
-        pcl::fromPCLPointCloud2(pcl_pc, cloud);
-*/
+   return;
 }
-
+*/
 
 
 }
@@ -47,6 +38,10 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "");
     mapper::wmap wmap_node;
     ros::Rate loop_rate(10);
+
+    tf::TransformListener tf(ros::Duration(10));
+    costmap_2d::Costmap2DROS costmap("my_costmap", tf);
+    costmap_2d::Costmap2DROS cost();
 
     while (ros::ok())
     {

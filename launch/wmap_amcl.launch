@@ -1,7 +1,7 @@
 <launch>
   <master auto="start"/>
   <param name="/use_sim_time" value="true"/>
-  <include file="$(find navigation_stage)/move_base_config/move_base.xml"/>
+  <include file="/home/tmrcv1/catkin_ws/src/wmap/navigation_stage/move_base_config/wmap_move_base.xml"/>
   <!--
   <node name="map_server" pkg="map_server" type="map_server" args="$(find navigation_stage)/stage_config/maps/willow-full-0.05.pgm 0.05" respawn="false" />
   <node pkg="stage_ros" type="stageros" name="stageros" args="$(find navigation_stage)/stage_config/worlds/willow-pr2-5cm.world" respawn="false" >

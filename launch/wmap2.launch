@@ -1,0 +1,16 @@
+<launch>
+  
+  <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="2 0 0 0 0 0 /world /base 100"/>
+
+  <!-- Publishes the voxel grid to rviz for display -->
+  <node pkg="costmap_2d" type="costmap_2d_markers" name="voxel_visualizer">
+    <remap from="voxel_grid" to="costmap/voxel_grid"/>
+  </node>
+
+  <!-- Run the costmap node -->
+  <node name="costmap_node" pkg="costmap_2d" type="costmap_2d_node" >
+    <rosparam file="/home/tmrcv1/catkin_ws/src/wmap/launch/minimal.yaml" command="load" ns="/costmap_node/costmap" />
+
+  </node>
+
+</launch>

@@ -1,0 +1,31 @@
+<launch>
+    <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="2 0 0 0 0 0 /base_link /map 100">
+        <remap from="/base_link" to="/base" />
+        <remap from="/map" to="/world" />
+    </node>
+
+    <!--
+    <arg name="with_camera" default="false"/>
+    <arg name="camera" default="chest_xtion"/>
+    <arg name="map"/>
+    -->
+    
+    <!-- lanch map server -->
+    <!--
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)"/> 
+    -->
+
+    <!-- launch AMCL -->
+    <!--
+    <include file="$(find wmap)/launch/amcl.launch"/>
+    -->
+
+    <!-- launch move base -->
+    <!--
+    <include file="$(find wmap)/launch/move_base_3d.launch" if="$(arg with_camera)">
+        <arg name="camera" value="$(arg camera)"/>
+    </include>
+    -->
+    <include file="$(find wmap)/launch/move_base.launch"/>
+
+</launch>

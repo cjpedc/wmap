@@ -9,7 +9,7 @@
     <!-- <rosparam file="$(find wmap)/move_base_config/costmap_common_params.yaml" command="load" ns="global_costmap" /> -->
     <rosparam file="$(find wmap)/move_base_config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find wmap)/move_base_config/local_costmap_params.yaml" command="load" />
-    <!-- <rosparam file="$(find wmap)/move_base_config/global_costmap_params.yaml" command="load" /> -->
+    <rosparam file="$(find wmap)/move_base_config/global_costmap_params.yaml" command="load" />
     <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
     <!-- <rosparam file="$(find wmap)/move_base_config/dwa_planner_ros.yaml" command="load" /> -->
 	</node>

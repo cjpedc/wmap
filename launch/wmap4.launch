@@ -1,9 +1,17 @@
 <launch>
+<!--
     <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="2 0 0 0 0 0 /base_link /map 100">
-        <remap from="/base_link" to="/base" />
-        <remap from="/map" to="/world" />
+        <remap from="/map" to="/odom" />
     </node>
+-->
 
+    <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /map /odom 100" />
+
+    <node name="static_tf1" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /odom /kinect2_rgb_optical_frame 100" />
+
+
+    <param name="/use_sim_time" value="false"/>
+    
     <!--
     <arg name="with_camera" default="false"/>
     <arg name="camera" default="chest_xtion"/>

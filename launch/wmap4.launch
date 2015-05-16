@@ -1,4 +1,5 @@
 <launch>
+
 <!--
     <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="2 0 0 0 0 0 /base_link /map 100">
         <remap from="/map" to="/odom" />
@@ -7,10 +8,13 @@
 
     <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /map /odom 100" />
 
+
+    <!--
     <node name="static_tf1" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /odom /kinect2_rgb_optical_frame 100" />
-
-
-    <param name="/use_sim_time" value="false"/>
+    <node name="static_tf1" pkg="tf" type="static_transform_publisher" args="0 0 0 -1.57 0 -1.57 /camera1 /kinect2_rgb_optical_frame 1" />
+    
+    <rosparam name="/use_sim_time" value="true"/>
+    -->
     
     <!--
     <arg name="with_camera" default="false"/>
